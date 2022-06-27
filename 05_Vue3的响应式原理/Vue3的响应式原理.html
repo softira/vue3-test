@@ -1,0 +1,50 @@
+<script>
+  // 源数据
+  let person = {
+    name: 'ts',
+    age: 18
+  }
+
+  // Vue2的响应式原理
+  // let p = {}
+
+  // Object.defineProperty(p, 'name', {
+  //   get() {
+  //     console.log('p的name属性被读取了');
+  //     return person.name
+  //   },
+  //   set(val) {
+  //     console.log('p的name属性被修改了');
+  //     person.name = val
+  //   }
+  // })
+  // Object.defineProperty(p, 'age', {
+  //   get() {
+  //     console.log('p的age属性被读取了');
+  //     return person.age
+  //   },
+  //   set(val) {
+  //     console.log('p的age属性被修改了');
+  //     person.age = val
+  //   }
+  // })
+
+  // Vue3的响应式原理
+  let p = new Proxy(person,{
+    // p的某个属性被读取时调用
+    get(target,propName){
+      console.log(`p中的${propName}属性被读取了`)
+      return Reflect.get(target,propName)
+    },
+    // p的某个属性被修改，或给p追加某个属性时调用
+    set(target,propName,value){
+      console.log(`p中的${propName}属性被修改了`)
+      Reflect.set(target,propName,value)
+    },
+    // p的某个属性被删除时调用
+    deleteProperty(target,propName,){
+      console.log(`p中的${propName}属性被删除了`)
+      return Reflect.deleteProperty(target,propName)
+    }
+  })
+</script>

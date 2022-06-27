@@ -1,10 +1,15 @@
 <template>
   <h1>{{person.name}}</h1>
   <h1>{{person.age}}</h1>
+  <h1 v-show="person.sex">{{person.sex}}</h1>
   <h2>{{person.job.type}}</h2>
   <h2>{{person.job.salary}}</h2>
   <h3 v-for="h in person.hobby" :key="h.index">{{h}}</h3>
   <button @click="changeInfo">changeInfo</button>
+  <br />
+  <button @click="addSex">addSex</button>
+  <br />
+  <button @click="deleteSalary">deleteSalary</button>
 </template>
 
 <script>
@@ -35,11 +40,19 @@
         console.log(person.job.a.b.c);
         person.hobby[0] = '学习'
       }
+      function addSex(){
+        person.sex = '男'
+      }
+      function deleteSalary(){
+        delete person.job.salary
+      }
 
       // 返回一个对象（常用）
       return {
         person,
         changeInfo,
+        addSex,
+        deleteSalary
       }
     }
   }
