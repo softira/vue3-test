@@ -92,3 +92,27 @@
       + sttrs：值为对象，包含：组件外部传递过来，但没有在props配置中生命的属性，相当于`this.$attrs`
       + slots：收到的插槽内容，相当于`this.$slots`
       + emit：分发自定义事件的函数，相当于`this.$emit`
+7. 计算属性与监视
+  1. computed函数
+    - 与Vue2.x中computed配置功能一致
+    - 写法
+      ```
+        import { computed } from 'vue'
+
+        setup(){
+          ...
+          // 计算属性——简写
+          let xxx = computed(()=>{
+            retrue ...
+          })
+          // 计算属性——完整
+          let xxx = computed({
+            get(){
+              retrue ...
+            }
+            set(val){
+              ... = val
+            }
+          })
+        }
+      ```
