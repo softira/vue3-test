@@ -116,3 +116,22 @@
           })
         }
       ```
+  2. watch函数
+    - 与Vue2.x中watch配置功能一致
+    - 两个小坑：
+      + 监视reactive定义的响应式数据时：oldValue无法正确获取、强制开启了深度监视（deep配置项失效）。
+      + 监视reactive定义的响应式数据中某个属性时：deep配置有效
+    ```
+      // 情况一
+      watch(xxx,(newValue,oldValue)=>{
+        xxx
+      },(immediate:true))
+      // 情况二
+      watch([xxx,yyy],(n,o)=>{
+        ...
+      })
+      //情况三
+      watch(() => xxx.aaa,(n,o) => {
+        ...
+      })
+    ```
