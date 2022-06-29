@@ -191,3 +191,29 @@
     + 使用场景：
       1. 有些值不应该被设置为响应式的，例如复杂的第三方类库
       2. 当渲染具有不可变数据源的大列表时，跳过响应式转换可以提高性能
+4. customRef
+  - 作用：创建一个自定义的ref，并对其依赖项跟踪和更新触发进行显示控制。
+  - 实现防抖效果：
+    ```
+      function myValueRef(value){
+        let timer
+        return customRef((track,trigger) => {
+          return {
+            get(){
+              console.log('getter被调用')
+              track() // 通知Vue追踪value的变化
+              return value
+            },
+            set(newValue){
+              clearTimeout(timer)
+              console.log('setter被调用')
+              value = newValue
+              timer = setTimeout(()=>{
+                trigger() // 通知Vue去重新解析模板
+              },1000)
+            }
+          }
+        })
+      }
+      let keyWord = myValueRef('')
+    ```
