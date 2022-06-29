@@ -17,7 +17,7 @@
    - 但在setup中不能访问到Vue2.x配置（data、methods、computed...）
    - 如果有重名，setup优先
 
-   2. setup不能是一个async函数，因为返回值不再是return的对象，而是promise，模板看不到return对象中的属性
+   2. setup不能是一个async函数，因为返回值不再是return的对象，而是promise，模板看不到return对象中的属性（后期也可以返回一个Promise实例，但需要Suspense和异步组件的配合）
 2. ref函数
 
    - 作用：定义一个响应式的数据
@@ -258,3 +258,27 @@
         ...
       </Teleport>
     ```
+3. Suspense
+  - 等待异步组件时渲染一些额外内容，让应用有更好的用户体验
+  - 使用步骤：
+    + 异步引入组件
+      ```
+        import {defineAsyncComponent} from 'vue'
+        const Child = defineAsyncComponent(()=>import('./components/Child.vue'))
+      ```
+    +使用`Suspense`包裹组件，并配置好`default`与`fallback`
+      ```
+        <template>
+          <div>
+            <h3>123</h3>
+            <Suspense>
+              <template v-slot:default>
+                <Child></Child>
+              </template>
+              <template v-slot:fallback>
+                <h3>loading...</h3>
+              </template>
+            </Suspense>
+          </div>
+        </template>
+      ```
