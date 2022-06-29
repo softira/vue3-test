@@ -239,3 +239,22 @@
   - isReactive：检查一个值是否由`reactive`创建的响应式代理
   - isReadonly：检查一个对象是否由`readonly`创建的只读代理
   - isProxy：检查一个对象是否是由`reactive`或`readonly`创建的代理
+ 
+## Compositon API 的优势
+1. Options API存在的问题
+  使用传统OptionsAPI中，新增或者修改一个需求，就需要分别在打她，methods，computed里修改
+2. Composition API的优势
+  我们可以更加优雅的组织我们的代码，函数。让相关功能的代码更加有序的组织在一起
+
+## 新的组件
+1. fragment
+  - 在vue2中：组件必须有一个根标签
+  - 在Vue3中：组件可以没有根标签，内部会将多个标签包含在一个Fragment虚拟元素中
+  - 好处：减少标签层级，减小内存占用
+2. Teleport
+  - Teleport是一种能够将我们的组件html结构移动到指定位置的技术
+    ```
+      <Teleport to='位置'>
+        ...
+      </Teleport>
+    ```
