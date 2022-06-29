@@ -234,3 +234,8 @@
           let xxx = inject('xxx')
         }
       ```
+6. 响应式数据的判断
+  - isRef：检查一个值是否为一个ref对象
+  - isReactive：检查一个值是否由`reactive`创建的响应式代理
+  - isReadonly：检查一个对象是否由`readonly`创建的只读代理
+  - isProxy：检查一个对象是否是由`reactive`或`readonly`创建的代理
